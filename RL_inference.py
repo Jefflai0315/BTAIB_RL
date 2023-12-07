@@ -43,7 +43,7 @@ class SpaDesPlacement(gym.Env):
         self.building = building  # Next: More buildings ...
         self.building_list = []
         self.action_space = spaces.Box(low=np.array(
-            [-1, -1, 3, -1]), high=np.array([1, 1, 10, 1]), shape=(4,), dtype=float)
+            [-1, -1, 3, 0.4]), high=np.array([1, 1, 10, 0.6]), shape=(4,), dtype=float)
         self.observation_space = spaces.Box(
             0, 1, shape=(np.prod(grid_size),), dtype=np.float32)
         self.boxes = np.empty((1, 4), dtype=float)
@@ -86,7 +86,7 @@ class SpaDesPlacement(gym.Env):
         X, Y = self._resize_polygon(
             self.building, self.building_scale, (x, y), angle)
         building = Polygon(zip(X, Y))
-        reward = 100  # * (len(self.boxes)) # reward for placing more building
+        reward = 100 
 
         if self._building_outside_boundary(building):
             reward -= 400
@@ -209,11 +209,11 @@ class SpaDesPlacement(gym.Env):
             else:
                 other_building_projection_line = LineString(
                     [(other_building_x2, other_building_y2), (other_building_x3, other_building_y3)])
-            if calculate_angle(projection_line, other_building_projection_line) < 30:
-                if buffer.intersects(other_box) or buffer2.intersects(other_box):
-                    reward -= 300
-                else:
-                    reward += 400
+            # if calculate_angle(projection_line, other_building_projection_line) < 30:
+            if buffer.intersects(other_box) or buffer2.intersects(other_box):
+                reward -= 300
+            else:
+                reward += 400
         return reward, is_valid
 
     def _building_outside_boundary(self, building):
@@ -305,7 +305,6 @@ class SpaDesPlacement(gym.Env):
 
 
 
-
 # inference
 building_list = [Polygon(((0.0, 0.0), (0.0, 1.1), (1.5, 1.1), (1.5, 2.0), (0.0, 2.0), (0.0, 3.0), (7.0, 3.0), (7.0, 2.0), (5.0, 2.0), (5.0, 1.1), (7.0, 1.1), (7.0, 0.0), (4.5, 0.0), (4.5, 0.5), (3.5, 0.5), (3.5, 0.0), (0.0, 0.0))),
                  #  Polygon(((0.0,0.0),(0.0,1.3),(1.5,1.3),(1.5,2.0),(0.0,2),(0.0,3),(5.0,3.0),(5.0,2.0),(3.0,2.0),(3.0,1.3),(5.0,1.3),(5.0,0.0),(0.0,0.0))),
@@ -334,7 +333,7 @@ sites_info = {'clavon': {'name': 'clavon',
                                  }}
 
 # load model
-load_path = 'best_model_3_w_interblock_distance_ppo96.zip'
+load_path = 'best_model_3_w_interblock_distance_ppo97.zip'
 if os.path.exists(load_path):
     model = PPO.load(load_path)
 else:
