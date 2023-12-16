@@ -18,7 +18,8 @@ This document provides an overview of the key components and scripts used in our
 
 ### pix2pix_inference
 - **Description**: Inference script for the Pix2Pix model.
-- **Usage**: Similar to the script used in the ArchitectMind.ai Flask application, it's employed for generating inferences from the Pix2Pix model. The trained Pix2Pix model can be accessed via [this link](#).
+- **Usage**: Similar to the script used in the ArchitectMind.ai Flask application, it's employed for generating inferences from the Pix2Pix model. The trained Pix2Pix model can be accessed via [this link](https://sutdapac-my.sharepoint.com/personal/pinnean_lai_mymail_sutd_edu_sg/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fpinnean%5Flai%5Fmymail%5Fsutd%5Fedu%5Fsg%2FDocuments%2Ftraining%5Fcheckpoints%2Ezip&parent=%2Fpersonal%2Fpinnean%5Flai%5Fmymail%5Fsutd%5Fedu%5Fsg%2FDocuments&ga=1).
+*note it is a zip file
 
 ### data_clavon
 - **Description**: Directory containing input images for the Pix2Pix model.
